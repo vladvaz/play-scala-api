@@ -58,14 +58,14 @@ class TodosController @Inject()(val controllerComponents: ControllerComponents)
             errors => BadRequest(errors.errorsAsJson),
             formData => {
                 val todoToUpdate = Todo(id, formData.description, formData.isDone, formData.dueDate, formData.orderId.getOrElse(0))
-                logger.debug(s"New todo created: ${todoToUpdate.toString()}")
+                logger.debug(s"Todo updated: ${todoToUpdate.toString()}")
                 Ok(Json.toJson(Todo.update(todoToUpdate)))
             }
         )
     }
 
     def delete(id: Int) = Action { implicit request: Request[AnyContent] => 
-        logger.debug(s"Delete todo by $id")
+        logger.debug(s"Delete todo with $id")
         Ok(Json.toJson(Todo.delete(id)))
     }
 
